@@ -65,7 +65,7 @@
     OCMStub([segContextMock eventType]).andReturn(SEGEventTypeTrack);
        
     SEGPayload* result = [_fullStoryMiddleware getNewPayloadWithFSURL:segContextMock];
-    XCTAssertTrue([result isKindOfClass:[SEGTrackPayload class]]);
+    XCTAssertTrue(strcmp(object_getClassName(result), "SEGTrackPayload") == 0);
 }
 
 - (void)testFullStoryMiddleware_GetNewPayloadWithFSURL_TrackPayload_ReturnsTrackPayloadWithFSURL {
@@ -92,7 +92,7 @@
     OCMStub([segContextMock eventType]).andReturn(SEGEventTypeScreen);
    
     SEGPayload* result = [_fullStoryMiddleware getNewPayloadWithFSURL:segContextMock];
-    XCTAssertTrue([result isKindOfClass:[SEGScreenPayload class]]);
+    XCTAssertTrue(strcmp(object_getClassName(result), "SEGScreenPayload") == 0);
 }
 
 - (void)testFullStoryMiddleware_GetNewPayloadWithFSURL_ScreenPayload_ReturnsScreenPayloadWithFSURL {

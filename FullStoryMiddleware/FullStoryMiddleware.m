@@ -117,11 +117,15 @@
             NSMutableDictionary *newProps = [[NSMutableDictionary alloc] initWithDictionary:screenPayload.properties];
             [newProps setValue:[FS currentSessionURL] forKey:@"FSSessionURL"];
 
-            newPayload = [[SEGScreenPayload alloc]
-                                           initWithName:screenPayload.name
-                                           properties:newProps
-                                           context:screenPayload.context
-                                           integrations:screenPayload.integrations];
+            // SEGScreenPayload initWithName signiture has changed @v4.1
+            // temporary workaround to set the catagory for post 4.1
+            SEGScreenPayload *screen = [[SEGScreenPayload alloc] initWithContext:screenPayload.context integrations:screenPayload.integrations];
+            [screen setValue:[screenPayload.name copy] forKey:@"name"];
+            [screen setValue:[newProps copy] forKey:@"properties"];
+            if(screen.category) {
+                [screen setValue:[screenPayload.category copy] forKey:@"category"];
+            }
+            newPayload = screen;
             break;
         }
         default:
