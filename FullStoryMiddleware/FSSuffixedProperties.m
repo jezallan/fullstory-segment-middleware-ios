@@ -107,16 +107,6 @@
     }
 }
 
-
-
-
-
-
-
-
-
-
-
 - (NSString *)getSuffixStringFromSimpleObject:(NSObject *)obj {
     // default to no suffix;
     NSString * suffix = @"";
